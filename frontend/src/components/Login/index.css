@@ -89,20 +89,6 @@
     margin-top: 10px;
 }
 
-.icon {
-    color: #878787;
-    margin: auto;
-
-}
-
-.icon:hover {
-    color: #e91e63;
-}
-
-.icons-container{
-    display: flex;
-    justify-content: space-between;
-}
 .signup {
     color: #e91e63;
     font-weight: 500;
@@ -110,7 +96,6 @@
 
 @media screen and (max-width:400px){
     .container{
-        width: 330px;
+        width: 400px;
     }
-
 }
