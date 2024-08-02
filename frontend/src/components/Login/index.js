@@ -1,14 +1,21 @@
 import { Link ,useNavigate} from 'react-router-dom';
 import Cookies from 'js-cookie';
-import { useState} from 'react';
+import { useEffect, useState} from 'react';
 import './index.css';
 
 const Login = () => {
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
     const navigate=useNavigate();
-    //const token=Cookies.get("token");
-    const url = 'http://localhost:5000/api/auth/login';
+    const token=Cookies.get("token");
+    const url = 'https://task1-todo.onrender.com/api/auth/login';
+
+    useEffect(()=>{
+        if(token!=undefined || token !=null){
+            navigate('/');
+        }
+
+    })
 
     const login = async (event) => {
         event.preventDefault();

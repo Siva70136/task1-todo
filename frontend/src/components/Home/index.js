@@ -6,14 +6,21 @@ import './index.css'
 
 const Home = () => {
     const [title, setTitle] = useState('');
+    const [desc, setDesc] = useState('');
     const [todos, setTodos] = useState([]);
     const navigate = useNavigate('');
-    const url = 'http://localhost:5000/api/todos';
+    const url = 'https://task1-todo.onrender.com/api/todos';
     const token = Cookies.get("token");
 
-
+    
     useEffect(() => {
-        getData();
+        //console.log(token===undefined);
+        if (token === undefined || token === null) {
+            navigate('/login');
+        }else{
+            getData();
+        }
+        
     }, [])
 
     const getData = async () => {
@@ -37,7 +44,7 @@ const Home = () => {
         }
     }
 
-    const update = async (item,status) => {
+    const update = async (item, status) => {
 
         const options = {
             method: "PUT",
@@ -64,7 +71,6 @@ const Home = () => {
             console.log("error");
         }
     }
-  
 
     const add = async (event) => {
         event.preventDefault();
@@ -78,7 +84,7 @@ const Home = () => {
             body: JSON.stringify({
                 title,
                 status: false,
-                description: "Learn in 20 days",
+                description: desc,
             })
         }
 
@@ -91,6 +97,7 @@ const Home = () => {
                 const data = await res.json();
                 localStorage.setItem("token", data.token);
                 setTitle("");
+                setDesc("");
                 getData();
                 console.log("User Login Successfully");
             }
@@ -101,7 +108,7 @@ const Home = () => {
         }
     }
 
-    const remove= async (id) =>{
+    const remove = async (id) => {
 
         const options = {
             method: "DELETE",
@@ -133,6 +140,7 @@ const Home = () => {
                             Create <span className="create-task-heading-subpart">Task</span>
                         </h1>
                         <input type="text" id="todoUserInput" className="todo-user-input" value={title} placeholder="What needs to be done?" onChange={(e) => { setTitle(e.target.value) }} />
+                        <input type="textarea"  className="todo-user-input" value={desc} placeholder="Description" onChange={(e) => { setDesc(e.target.value) }} />
                         <div>
                             <button className="button1" id="addTodoButton" onClick={add}>Add</button>
                         </div>
@@ -143,11 +151,14 @@ const Home = () => {
                             {todos.map(each => {
                                 return (
                                     <li className='todo-item-container' key={each._id}>
-                                        <input type='checkbox' className='checkbox-input' checked={each.status==='false'?false:true} onChange={(e) => { update(each,e.target.checked)}} />
+                                        <input type='checkbox' className='checkbox-input' checked={each.status === 'false' ? false : true} onChange={(e) => { update(each, e.target.checked) }} />
                                         <div className='label-container'>
-                                            <label  className='checkbox-label' >{each.title}</label>
+                                            <span className='checkbox-data'>
+                                                <label className='checkbox-label' >{each.title}</label>
+                                                <label className='checkbox-label-desc' >{each.description}</label>
+                                            </span>
                                             <div className='delete-icon-container'>
-                                                <MdDeleteOutline className='delete-icon' onClick={()=>{remove(each._id)}}/>
+                                                <MdDeleteOutline className='delete-icon' onClick={() => { remove(each._id) }} />
                                             </div>
                                         </div>
                                     </li>

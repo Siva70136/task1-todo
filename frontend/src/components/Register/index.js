@@ -1,16 +1,23 @@
 import { Link, useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
-import { useState} from 'react';
+import { useState,useEffect} from 'react';
 import './index.css'
 const Register = () => {
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
+    const token=Cookies.get("token");
     const navigate=useNavigate();
+    
+    useEffect(()=>{
+        if(token!=undefined || token !=null){
+            navigate('/');
+        }
 
+    })
 
     const register = async (event) => {
         event.preventDefault();
-        const url = 'http://localhost:5000/api/auth/register';
+        const url = 'https://task1-todo.onrender.com/api/auth/register';
         const options = {
             method: "POST",
             headers: {
