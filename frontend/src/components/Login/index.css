@@ -91,3 +91,11 @@
     color: #e91e63;
     font-weight: 500;
 }
+
+@media screen and (max-width:400px){
+    .container{
+        display: flex;
+        width: 330px;
+    }
+
+}
