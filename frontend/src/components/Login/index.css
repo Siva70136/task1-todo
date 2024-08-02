@@ -5,13 +5,16 @@
     flex-direction: column;
     justify-content: center;
     padding: 40px;
-    box-shadow: 0px 0px 3px 1px black;
+    box-shadow: 0px 0px 3px 1px rgb(158, 155, 155);
     margin-top: 20px;
 }
 
 .container {
-    align-content: center;
-    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: radial-gradient(circle, #eeaeca 0, #94bbe9 100%);
 }
 
 .form {
@@ -39,16 +42,28 @@
     font-weight: bold;
     color: #e91e63;
     font-size: 28px;
+    line-height: 0px;
 }
 
 .label-data {
+    color: #666667;
+    font-family: Roboto;
     font-size: 14px;
-    color: #82818d;
-    font-family: 'Roboto';
     font-weight: 500;
-    text-align: left;
+    line-height: 20px;
+    margin-left: 9px;
 }
-
+.form-control {
+    border: 1px solid #6e6e6e;
+    margin-bottom: 8px;
+    outline: none;
+    padding: 10px;
+}
+.remember-container {
+    align-items: center;
+    display: flex;
+    margin-bottom: 8px;
+}
 
 
 .button {
@@ -95,7 +110,6 @@
 
 @media screen and (max-width:400px){
     .container{
-        display: flex;
         width: 330px;
     }
 
