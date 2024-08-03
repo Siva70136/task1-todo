@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { MdDeleteOutline, MdOutlineEdit } from "react-icons/md";
+import { LuLogOut } from "react-icons/lu";
 import Cookies from 'js-cookie';
 import './index.css'
 
@@ -99,7 +100,7 @@ const Home = () => {
                 setTitle("");
                 setDesc("");
                 getData();
-               
+
             }
 
         }
@@ -137,7 +138,7 @@ const Home = () => {
 
     const statusChange = (item, status) => {
         update({
-            _id:item._id,
+            _id: item._id,
             title: item.title,
             status,
             description: item.description,
@@ -150,12 +151,12 @@ const Home = () => {
         setStat(todo.setStat);
         setDesc(todo.description);
     }
-    const onUpdate=()=>{
+    const onUpdate = () => {
         update({
-            _id:id,
+            _id: id,
             title,
-            status:stat,
-            description:desc,
+            status: stat,
+            description: desc,
         })
     }
 
@@ -165,12 +166,12 @@ const Home = () => {
                 <div className="row">
                     <div className="col-12">
                         <h1 className="todos-heading">Todos</h1>
-                        <h1 className="create-task-heading">
-                            <span className="create-task-heading-subpart">Create Task</span>
-                            <div>
-                                <button className="button1" onClick={logout}>Logout</button>
-                            </div>
-                        </h1>
+                        <div className="create-task-heading">
+                            <h1 className="create-task-heading-subpart">Create Task</h1>
+                            <LuLogOut className='delete-icon logout' onClick={logout}/>
+                           
+
+                        </div>
                         <input type="text" id="todoUserInput" className="todo-user-input" value={title} placeholder="What needs to be done?" onChange={(e) => { setTitle(e.target.value) }} />
                         <input type="textarea" className="todo-user-input" value={desc} placeholder="Description" onChange={(e) => { setDesc(e.target.value) }} />
                         <div>
