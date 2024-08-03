@@ -129,6 +129,11 @@ const Home = () => {
             console.log("error");
         }
     }
+    const logout=()=>{
+        
+        Cookies.remove('token');
+        navigate('/login');
+    }
 
     return (
         <div className="todos-bg-container">
@@ -137,7 +142,10 @@ const Home = () => {
                     <div className="col-12">
                         <h1 className="todos-heading">Todos</h1>
                         <h1 className="create-task-heading">
-                            Create <span className="create-task-heading-subpart">Task</span>
+                             <span className="create-task-heading-subpart">Create Task</span>
+                            <div>
+                            <button className="button1" onClick={logout}>Logout</button>
+                        </div>
                         </h1>
                         <input type="text" id="todoUserInput" className="todo-user-input" value={title} placeholder="What needs to be done?" onChange={(e) => { setTitle(e.target.value) }} />
                         <input type="textarea"  className="todo-user-input" value={desc} placeholder="Description" onChange={(e) => { setDesc(e.target.value) }} />

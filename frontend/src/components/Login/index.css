@@ -27,6 +27,7 @@
 }
 .btn{
     margin-top: 10px;
+    cursor: pointer;
 }
 .acc{
     margin: auto;
@@ -72,6 +73,7 @@
     color: white;
     font-family: 'Roboto';
     font-weight: 300;
+    cursor: pointer;
 }
 
 .label-check {

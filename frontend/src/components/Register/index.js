@@ -1,7 +1,9 @@
 import { Link, useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
+import { ToastContainer, toast } from 'react-toastify';
 import { useState, useEffect } from 'react';
-import './index.css'
+import './index.css';
+
 const Register = () => {
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
@@ -28,22 +30,62 @@ const Register = () => {
         //console.log(options);
         try {
             const res = await fetch(url, options);
-            console.log(res);
+            //console.log(res);
             if (res.ok) {
                 const data = await res.json();
                 Cookies.set("token", data.token, {
                     expires: 30,
                     path: '/',
                 });
-                setPassword("");
-                setUserName("");
-                navigate('/');
-                console.log("User registered Successfully");
+
+                await new Promise((resolve) => {
+                    toast.success('Registered Successfully', {
+                        position: "top-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                        onClose: resolve // Resolve promise when the toast is closed
+                    });
+                });
+                setTimeout(() => {
+                    navigate('/');
+                }, 3000);
+
             }
+            else {
+                const data = await res.json();
+                toast.error(`${data.msg}`, {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+
+                });
+                //console.log(data);
+            }
+            setPassword("");
+            setUserName("");
 
         }
         catch {
-            console.log("Error");
+            toast.error('An error occurred', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
         }
     }
 
@@ -57,7 +99,7 @@ const Register = () => {
                     <p id="nameErrMsg"></p>
                     <label htmlFor="PWD" className="label-data">Password</label><br />
                     <input type="password" name="" id="PWD" value={password} className="form-control input" placeholder="Password" onChange={(e) => { setPassword(e.target.value) }} />
-                    
+
                     <div className='remember-container'>
                         <input type="checkbox" name="" id="save" className="label-check" />
                         <label htmlFor="save" className="label-data">Remember me</label><br />
@@ -73,6 +115,7 @@ const Register = () => {
                     </Link>
                 </p>
             </div>
+            <ToastContainer />
         </div>
     )
 }

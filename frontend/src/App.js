@@ -1,9 +1,8 @@
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
-import Cookies from 'js-cookie';
 import Login from "./components/Login";
 import Register from './components/Register';
 import Home from './components/Home';
-
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
   return (

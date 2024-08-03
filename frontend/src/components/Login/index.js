@@ -1,7 +1,9 @@
 import { Link, useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { useEffect, useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
 import './index.css';
+
 
 const Login = () => {
     const [userName, setUserName] = useState('');
@@ -37,15 +39,58 @@ const Login = () => {
                     expires: 30,
                     path: '/',
                 });
-                setPassword("");
-                setUserName("");
-                navigate('/');
-                console.log("User Login Successfully");
+                
+                await new Promise((resolve) => {
+                    toast.success('User Login Successfully', {
+                        position: "top-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                        onClose: resolve // Resolve promise when the toast is closed
+                    });
+                });
+                
+                
+                setTimeout(() => {
+                    navigate('/');
+                }, 1000);
+
+                
             }
+            else {
+                const data = await res.json();
+                toast.error(`${data.msg}`, {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+
+                });
+                //console.log(data);
+            }
+            setPassword("");
+            setUserName("");
 
         }
         catch {
-            console.log("Error");
+            toast.error('An error occurred', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
         }
     }
     return (
@@ -58,7 +103,7 @@ const Login = () => {
                     <p id="nameErrMsg"></p>
                     <label htmlFor="PWD" className="label-data">Password</label><br />
                     <input type="password" name="" id="PWD" value={password} className="form-control input" placeholder="Password" onChange={(e) => { setPassword(e.target.value) }} />
-                    
+
                     <div className='remember-container'>
                         <input type="checkbox" name="" id="save" className="label-check" />
                         <label htmlFor="save" className="label-data">Remember me</label><br />
@@ -75,6 +120,7 @@ const Login = () => {
                 </p>
 
             </div>
+            <ToastContainer />
         </div>
     )
 }
