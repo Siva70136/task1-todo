@@ -41,19 +41,17 @@ const Register = () => {
                 await new Promise((resolve) => {
                     toast.success('Registered Successfully', {
                         position: "top-right",
-                        autoClose: 2000,
+                        autoClose: 1000,
                         hideProgressBar: false,
                         closeOnClick: true,
-                        pauseOnHover: true,
+                        pauseOnHover: false,
                         draggable: true,
                         progress: undefined,
                         theme: "light",
-                        onClose: resolve // Resolve promise when the toast is closed
+                        onClose: resolve ,
                     });
                 });
-                setTimeout(() => {
-                    navigate('/');
-                }, 3000);
+                navigate('/');
 
             }
             else {

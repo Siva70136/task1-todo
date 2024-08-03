@@ -39,27 +39,23 @@ const Login = () => {
                     expires: 30,
                     path: '/',
                 });
-                
+
                 await new Promise((resolve) => {
                     toast.success('User Login Successfully', {
                         position: "top-right",
-                        autoClose: 2000,
+                        autoClose: 1000,
                         hideProgressBar: false,
                         closeOnClick: true,
-                        pauseOnHover: true,
+                        pauseOnHover: false,
                         draggable: true,
                         progress: undefined,
                         theme: "light",
-                        onClose: resolve // Resolve promise when the toast is closed
+                        onClose: resolve ,
                     });
                 });
-                
-                
-                setTimeout(() => {
-                    navigate('/');
-                }, 1000);
 
-                
+                navigate('/');
+
             }
             else {
                 const data = await res.json();
