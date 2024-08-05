@@ -6,22 +6,10 @@ const app = express();
 app.use(express.json());
 const cors=require("cors");
 app.use(cors());
+const connectDB = require('./config/db');
 
-//==============Connection =========================
-
-mongoose.connect(process.env.MONGO_CONNECTION, { useNewUrlParser: true })
-  .then(() => {
-    console.log("MongoDB is Connected..")
-  }).catch(err => {
-    console.log(err.message);
-  })
-
-const db = mongoose.connection;
-
-db.on('error', console.error.bind(console, 'Connection error:'));
-db.once('open', () => {
-  console.log('Database connected!');
-});
+//================ Connect DB==========================
+connectDB();
 
 //================ Routes ==========================
 
